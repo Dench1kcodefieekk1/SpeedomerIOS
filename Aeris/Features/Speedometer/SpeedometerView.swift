@@ -155,7 +155,7 @@ struct SpeedometerView: View {
 
     private var statsRow: some View {
         LazyVGrid(
-            columns: [GridItem(.adaptive(minimum: 72, spacing: 8), spacing: 8)],
+            columns: [GridItem(.adaptive(minimum: 72), spacing: 8)],
             spacing: 8
         ) {
             StatTile(label: "Distance", value: unit.distanceText(fromMeters: engine.distanceMeters))

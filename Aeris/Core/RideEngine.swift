@@ -79,7 +79,7 @@ final class RideEngine: NSObject, CLLocationManagerDelegate {
         locationStatus = manager.authorizationStatus
         switch manager.authorizationStatus {
         case .notDetermined:
-            manager.requestWhenInUse()
+            manager.requestWhenInUseAuthorization()
         case .authorizedWhenInUse, .authorizedAlways:
             manager.startUpdatingLocation()
         default:
@@ -126,10 +126,10 @@ final class RideEngine: NSObject, CLLocationManagerDelegate {
     @discardableResult
     func finishAndSave(into context: ModelContext) -> Ride? {
         guard state != .idle else { return nil }
-        if let segmentStart {
-            completedMovingSeconds += Date().timeIntervalSince(segmentStart)
-            segmentStart = nil
+        if let start = segmentStart {
+            completedMovingSeconds += Date().timeIntervalSince(start)
         }
+        segmentStart = nil
         movingSeconds = completedMovingSeconds
         manager.allowsBackgroundLocationUpdates = false
         stopTicker()

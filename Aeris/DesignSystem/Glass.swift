@@ -30,15 +30,28 @@ extension View {
         interactive: Bool = false
     ) -> some View {
         if #available(iOS 26.0, *) {
-            var glass = Glass.regular
-            if let tint { glass = glass.tint(tint) }
-            if interactive { glass = glass.interactive() }
-            self.glassEffect(glass, in: shape)
+            self.glassEffect(GlassFactory.make(tint: tint, interactive: interactive), in: shape)
         } else {
             self
                 .background(.ultraThinMaterial, in: shape)
                 .overlay(shape.strokeBorder(.quaternary, lineWidth: 0.5))
         }
+    }
+}
+
+/// Builds `Glass` values outside of `@ViewBuilder` context — statements like
+/// assignments are not allowed inside a view builder.
+@available(iOS 26.0, *)
+private enum GlassFactory {
+    static func make(tint: Color?, interactive: Bool) -> Glass {
+        var glass = Glass.regular
+        if let tint {
+            glass = glass.tint(tint)
+        }
+        if interactive {
+            glass = glass.interactive()
+        }
+        return glass
     }
 }
 
