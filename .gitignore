@@ -1,0 +1,16 @@
+# XcodeGen output (regenerate with `xcodegen generate`)
+*.xcodeproj
+
+# Xcode user state
+xcuserdata/
+DerivedData/
+*.xcuserstate
+
+# macOS
+.DS_Store
+
+# Build products
+build/
+*.ipa
+*.dSYM.zip
+*.dSYM

@@ -1,0 +1,68 @@
+name: Aeris
+options:
+  bundleIdPrefix: com.aeris
+  deploymentTarget:
+    iOS: "17.0"
+  createIntermediateGroups: true
+
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    CODE_SIGN_STYLE: Automatic
+    ENABLE_USER_SCRIPT_SANDBOXING: YES
+
+targets:
+  Aeris:
+    type: application
+    platform: iOS
+    sources:
+      - path: Aeris
+    info:
+      path: Aeris/Info.plist
+      properties:
+        CFBundleDisplayName: Aeris
+        CFBundleShortVersionString: "1.0"
+        CFBundleVersion: "1"
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        ITSAppUsesNonExemptEncryption: false
+        NSLocationWhenInUseUsageDescription: >-
+          Aeris uses your location to show your live speed and to record your
+          route, distance and elevation while you ride.
+        NSLocationAlwaysAndWhenInUseUsageDescription: >-
+          Aeris needs location access in the background to keep recording your
+          ride when the screen is off or you switch to another app.
+        UIBackgroundModes:
+          - location
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.aeris.ride
+        TARGETED_DEVICE_FAMILY: "1"
+        MARKETING_VERSION: "1.0"
+        CURRENT_PROJECT_VERSION: "1"
+
+  AerisTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: AerisTests
+    dependencies:
+      - target: Aeris
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.aeris.ride.tests
+        GENERATE_INFOPLIST_FILE: YES
+
+schemes:
+  Aeris:
+    build:
+      targets:
+        Aeris: all
+    run:
+      config: Debug
+    test:
+      config: Debug
+      gatherCoverageData: false
+      targets:
+        - AerisTests
