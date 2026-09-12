@@ -24,7 +24,7 @@ extension View {
     /// falls back to an ultra-thin system material with a hairline border, so
     /// the app stays stable wherever it runs.
     @ViewBuilder
-    func glassSurface<S: Shape>(
+    func glassSurface<S: InsettableShape>(
         in shape: S,
         tint: Color? = nil,
         interactive: Bool = false
