@@ -74,10 +74,11 @@ Aeris/
 ├── AerisApp.swift                  # App entry, engine + SwiftData container
 ├── Assets.xcassets/                # Accent color, app icon
 ├── Core/
-│   ├── RideEngine.swift            # Location session + ride state machine
-│   ├── Models/Ride.swift           # SwiftData model + RidePoint samples
-│   ├── SpeedUnit.swift             # km/h ↔ mph conversion & formatting
-│   └── Formatters.swift            # Dates, durations, month sections
+│   ├── Location/LocationService.swift # CLLocationManager → AsyncStream bridge
+│   ├── RideEngine.swift               # Ride state machine (async consumers)
+│   ├── Models/Ride.swift              # SwiftData model + RidePoint samples
+│   ├── SpeedUnit.swift                # km/h ↔ mph conversion & formatting
+│   └── Formatters.swift               # Dates, durations, month sections
 ├── DesignSystem/
 │   ├── Glass.swift                 # glassSurface / GlassGroup / GlassButton
 │   ├── Motion.swift                # Animation.glass (Reduce Motion) + haptics
